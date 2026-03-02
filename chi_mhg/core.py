@@ -215,11 +215,6 @@ def chi_mhg(r, rs: float):
     48 meta-parameters (8 per physical quantity × 6 quantities) fully
     determine χ for any (r, rₛ) pair.  No Fourier transforms are used;
     evaluation is O(len(r)).
-
-    References
-    ----------
-    .. Güneş, Holzmann, & Pedroza (2025). Interpolation of the
-       density-density response function of the homogeneous electron gas.
     """
     r = np.asarray(r, dtype=float)
 
