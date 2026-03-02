@@ -61,9 +61,6 @@ $0.5 \leq r_s \leq 10.0$ (a warning is emitted outside this range).
 
 - NumPy ≥ 1.24
 
-## Reference
-
-Güneş, Holzmann, & Pedroza (2025). *Interpolation of the density-density response function of the homogeneous electron gas.*
 
 ## License
 
