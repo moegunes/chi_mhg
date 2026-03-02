@@ -46,8 +46,10 @@ $$\Delta\chi(r) = B_0\,e^{-\alpha_0 k_F r}\cos(2\pi f_0\,k_F r + \varphi_0)
 where:
 - The **six shape parameters** $(\alpha_0, f_0, \varphi_0, \alpha_1, f_1, \varphi_1)$ are fitted at each $r_s$ to reproduce the QMC-constrained response function (Corradini–Del Sole–Moroni–Perdew-Zunger local field factor).
 - The **amplitudes** $B_0, B_1$ are fixed by the zeroth and first frequency-moment sum rules.
-- Each shape parameter is **interpolated** across $r_s$ using a modified Padé [2/3] form:
-$$p(r_s) = g + \frac{a + b\,r_s + c\,r_s^2 + h\,r_s^3}{1 + d\,r_s + e\,r_s^2 + f\,r_s^3}$$
+- Each shape parameter is **interpolated** across $r_s$ using a modified Padé [2/3] form in $\sqrt{r_s}$ (mPZ[2/3]√):
+$$s=\sqrt{r_s},\qquad p(r_s) = g + \frac{a + b\,s + c\,s^2 + h\,s^3}{1 + d\,s + e\,s^2 + f\,s^3}$$
+
+The current release uses this mPZ[2/3]√ interpolation as the default coefficient set.
 
 This gives **48 meta-parameters** (8 coefficients × 6 quantities) that fully determine $\chi(r, r_s)$ for any $(r, r_s)$ pair without Fourier transforms.
 
