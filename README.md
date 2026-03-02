@@ -40,8 +40,8 @@ $$\chi(r, r_s) = \chi_0(r, r_s) + (-6\pi\,n_0\,N_F)\,\Delta\chi(r, r_s)$$
 
 The interacting correction $\Delta\chi(r)$ is modeled as two damped cosines:
 
-$$\Delta\chi(r) = B_0\,e^{-\alpha_0 k_F r}\cos(2\pi f_0\,k_F r + \varphi_0)
-    + B_1\,e^{-\alpha_1 k_F r}\cos(2\pi f_1\,k_F r + \varphi_1)$$
+$$\Delta\chi(r) = B_0\,e^{-\alpha_0 k_F r}\cos(k_0\k_F r + \varphi_0)
+    + B_1\,e^{-\alpha_1 k_F r}\cos(k_1\k_F r + \varphi_1)$$
 
 where:
 - The **six shape parameters** $(\alpha_0, f_0, \varphi_0, \alpha_1, f_1, \varphi_1)$ are fitted at each $r_s$ to reproduce the QMC-constrained response function (Corradini–Del Sole–Moroni–Perdew-Zunger local field factor).
