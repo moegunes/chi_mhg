@@ -9,7 +9,7 @@ is decomposed as:
 
 where χ₀ is the non-interacting Lindhard function in real space and Δχ
 is a two-damped-cosine correction whose parameters are interpolated
-from QMC-constrained fits using the modified Padé [2/3] form.
+from QMC-constrained fits using the modified Padé [2/3] form in √rₛ.
 """
 
 from __future__ import annotations
@@ -34,22 +34,22 @@ def _gas_params(rs: float) -> tuple[float, float, float]:
     return kF, n0, NF
 
 
-def _mpz23(rs: float, c: np.ndarray) -> float:
-    """Evaluate the mPZ[2/3] form at *rs* with coefficients *c*.
+def _mpz23_sqrt(rs: float, c: np.ndarray) -> float:
+    """Evaluate the mPZ[2/3]√ form at *rs* with coefficients *c*.
 
-    f(rs) = g + (a + b·rs + c·rs² + h·rs³) / (1 + d·rs + e·rs² + f·rs³)
+    s = √rs
+    f(rs) = g + (a + b·s + c·s² + h·s³) / (1 + d·s + e·s² + f·s³)
 
     Parameters in *c*: [a, b, c, d, e, f, g, h].
     """
     a, b, cc, d, e, f, g, h = c
-    return g + (a + b * rs + cc * rs**2 + h * rs**3) / (
-        1.0 + d * rs + e * rs**2 + f * rs**3
-    )
+    s = np.sqrt(rs)
+    return g + (a + b * s + cc * s**2 + h * s**3) / (1.0 + d * s + e * s**2 + f * s**3)
 
 
 def _interpolate_params(rs: float) -> np.ndarray:
     """Interpolate the 6 physical parameters (α₀, f₀, φ₀, α₁, f₁, φ₁) at *rs*."""
-    return np.array([_mpz23(rs, COEFFICIENTS[p]) for p in PARAM_NAMES])
+    return np.array([_mpz23_sqrt(rs, COEFFICIENTS[p]) for p in PARAM_NAMES])
 
 
 def _J_n_m_kFr(n: int, k: float, gamma: float, phi: float, kF: float) -> float:
@@ -195,7 +195,7 @@ def chi_mhg(r, rs: float):
         \chi(r, r_s) = \chi_0(r, r_s) + (-6\pi\,n_0\,N_F)\,\Delta\chi(r, r_s)
 
     The six shape parameters of the two-damped-cosine model for Δχ are
-    interpolated in *rₛ* using a modified Padé [2/3] form fitted to
+    interpolated in *rₛ* using a modified Padé [2/3] form in √rₛ fitted to
     QMC-constrained data at 51 electron densities.
 
     Parameters
