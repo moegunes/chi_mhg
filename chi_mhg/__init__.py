@@ -10,7 +10,8 @@ Usage::
 
 """
 
-from .core import chi0_heg, chi_mhg, delta_chi_mhg
+from .chi import chi0_heg, chi_mhg, delta_chi_mhg
+from .pi import delta_pi_mhg, pi_mhg
 
-__all__ = ["chi_mhg", "pi_mhg", "chi0_heg", "delta_chi_mhg"]
+__all__ = ["chi_mhg", "pi_mhg", "chi0_heg", "delta_chi_mhg", "delta_pi_mhg"]
 __version__ = "0.2.0"
