@@ -12,5 +12,5 @@ Usage::
 
 from .core import chi0_heg, chi_mhg, delta_chi_mhg
 
-__all__ = ["chi_mhg", "chi0_heg", "delta_chi_mhg"]
-__version__ = "0.1.0"
+__all__ = ["chi_mhg", "pi_mhg", "chi0_heg", "delta_chi_mhg"]
+__version__ = "0.2.0"
