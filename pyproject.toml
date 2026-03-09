@@ -13,7 +13,7 @@ authors = [{ name = "Muhammed Güneş" }]
 dependencies = ["numpy>=1.24"]
 
 [project.urls]
-Homepage = "https://github.com/muhammedxgunes/chi_mhg"
+Homepage = "https://github.com/moegunes/chi_mhg"
 
 [tool.setuptools.packages.find]
 include = ["chi_mhg*"]
