@@ -1,27 +1,35 @@
-"""Interpolation coefficients for the mPZ[2/3]√ parametric form.
+"""Interpolation coefficients for χ(r) and Π(r) of the homogeneous electron gas.
 
-Each physical parameter p(rs) is represented as:
+Both response functions use the same two-damped-cosine model for Δ(r):
 
-    s = √rs
-    p(rs) = g + (a + b·s + c·s² + h·s³) / (1 + d·s + e·s² + f·s³)
+    Δ(r) = B₀ exp(-α₀ kF r) cos(2πf₀ kF r + φ₀)
+         + B₁ exp(-α₁ kF r) cos(2πf₁ kF r + φ₁)
 
-i.e. a modified Padé [2/3] in √rs, with 8 coefficients
-[a, b, c, d, e, f, g, h] per parameter.
+with B₀, B₁ fixed by moment constraints (different for χ vs Π).
 
-The 6 parameters describe a two-damped-cosine model for Δχ(r):
+**χ** — density-density response (bare Coulomb):
+    6 shape parameters interpolated using mPZ[2/3]√ in √rₛ  (8 coefficients each, 48 total).
 
-    Δχ(r) = B₀ exp(-α₀ kF r) cos(2πf₀ kF r + φ₀)
-          + B₁ exp(-α₁ kF r) cos(2πf₁ kF r + φ₁)
-
-where B₀, B₁ are fixed by moment constraints.
+**Π** — polarisation function (screened Coulomb, κ = 0.0225):
+    6 shape parameters interpolated using mPZ[3/4] in rₛ  (10 coefficients each, 60 total).
 """
 
 import numpy as np
 
+# ── parameter names (same for χ and Π) ────────────────────────────────────
 PARAM_NAMES = ("alpha0", "f0", "phi0", "alpha1", "f1", "phi1")
 
+# ═══════════════════════════════════════════════════════════════════════════
+# χ coefficients  —  mPZ[2/3]√ form
+#
+#   s = √rs
+#   p(rs) = g + (a + b·s + c·s² + h·s³) / (1 + d·s + e·s² + f·s³)
+#
+#   Coefficients: [a, b, c, d, e, f, g, h]
+# ═══════════════════════════════════════════════════════════════════════════
+
 # fmt: off
-COEFFICIENTS = {
+CHI_COEFFICIENTS = {
     "alpha0": np.array([
         -1.4783742381333058e+00,  4.4952145961535166e+00, -4.4521816536033842e+00,
          5.9254024367943670e-01, -2.8809855330220757e+00,  1.6182863069553930e+00,
@@ -55,6 +63,66 @@ COEFFICIENTS = {
 }
 # fmt: on
 
-N_COEFFICIENTS_PER_PARAM = 8
-TOTAL_COEFFICIENTS = N_COEFFICIENTS_PER_PARAM * len(PARAM_NAMES)  # 48
-RS_RANGE = (0.5, 10.0)
+CHI_N_COEFFICIENTS_PER_PARAM = 8
+CHI_TOTAL_COEFFICIENTS = CHI_N_COEFFICIENTS_PER_PARAM * len(PARAM_NAMES)  # 48
+CHI_RS_RANGE = (0.5, 10.0)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Π coefficients  —  mPZ[3/4] form
+#
+#   p(rs) = j + (a + b·rs + c·rs² + d·rs³ + i·rs⁴)
+#               / (1 + e·rs + f·rs² + g·rs³ + h·rs⁴)
+#
+#   Coefficients: [a, b, c, d, e, f, g, h, i, j]
+# ═══════════════════════════════════════════════════════════════════════════
+
+# fmt: off
+PI_COEFFICIENTS = {
+    "alpha0": np.array([
+        -3.7516433321076852e+02, -7.5542794853484338e+02,  4.7171034926839314e+02,
+        -4.7715561801575106e+01,  5.0902917952325697e+03, -1.0486840029094605e+04,
+         1.1409610709018243e+04,  6.6782676401889739e+02,  4.6614461864363841e+02,
+         1.2056189433007853e+00,
+    ]),
+    "f0": np.array([
+        -7.7272585677498096e-01,  1.3838746888200510e+00, -9.2419055215472568e-01,
+         1.8682316516762207e+00, -1.9278694693718332e+00,  1.6969335145131075e+00,
+        -3.0366479142955876e+00,  2.4969125923307787e+00, -1.7301067411741202e+00,
+         8.0759787504841152e-01,
+    ]),
+    "phi0": np.array([
+         1.4475557226810087e+00, -8.0055264081830124e+00,  1.2591319725968106e+01,
+        -1.4269163543784564e+00, -1.6685531692226718e+01,  7.0455950667419231e+01,
+        -1.1572909234877004e+02,  6.7118932781552203e+01, -6.6280817251298174e+00,
+         2.1871950160185047e+00,
+    ]),
+    "alpha1": np.array([
+         9.5874996190382955e+00, -5.6984401329141697e+01,  9.4105980739518102e+01,
+        -1.5816436579708643e+01, -5.9457140643161210e+00,  9.8316138530196238e+00,
+        -1.6575692959583965e+00,  6.3563663519356339e-01,  5.9944415118117842e+00,
+        -8.6085005637759426e+00,
+    ]),
+    "f1": np.array([
+        -1.1364084641206771e+00,  1.6062746485841561e+00,  6.1206257013082443e-01,
+        -1.1772889695021402e+00,  1.8623514534543485e+01, -4.4405882916767389e+01,
+         2.3674416595284509e+01,  2.2088628113546540e+00,  3.4433023412561610e-02,
+         2.7445442444564189e-01,
+    ]),
+    "phi1": np.array([
+         6.1598358215069171e-01, -2.2320100877828595e+00,  1.6918608603091803e+00,
+         2.8639694605619530e+00, -6.7044798485563941e+00,  1.7741023425486766e+01,
+        -2.0805285904258795e+01,  9.7796973163128502e+00, -3.4006641366032060e+00,
+         5.4038674665871345e-01,
+    ]),
+}
+# fmt: on
+
+PI_N_COEFFICIENTS_PER_PARAM = 10
+PI_TOTAL_COEFFICIENTS = PI_N_COEFFICIENTS_PER_PARAM * len(PARAM_NAMES)  # 60
+PI_RS_RANGE = (0.2, 10.0)
+
+# ── Backward-compatible aliases ───────────────────────────────────────────
+COEFFICIENTS = CHI_COEFFICIENTS
+RS_RANGE = CHI_RS_RANGE
+N_COEFFICIENTS_PER_PARAM = CHI_N_COEFFICIENTS_PER_PARAM
+TOTAL_COEFFICIENTS = CHI_TOTAL_COEFFICIENTS

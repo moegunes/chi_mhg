@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "chi_mhg"
-version = "0.2.1"
-description = "Interpolated real-space response function of the homogeneous electron gas"
+version = "0.2.0"
+description = "Interpolated real-space response functions (χ and Π) of the homogeneous electron gas"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
@@ -13,7 +13,7 @@ authors = [{ name = "Muhammed Güneş" }]
 dependencies = ["numpy>=1.24"]
 
 [project.urls]
-Homepage = "https://github.com/moegunes/chi_mhg"
+Homepage = "https://github.com/muhammedxgunes/chi_mhg"
 
 [tool.setuptools.packages.find]
 include = ["chi_mhg*"]
